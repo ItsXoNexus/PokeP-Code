@@ -1,0 +1,688 @@
+import discord, os, requests, json, time, random, asyncio, Discord_Hex
+from asyncio import sleep
+import tracemalloc
+tracemalloc.start()
+from discord.ext import commands
+from keep_alive import keep_alive
+supportA = "<@!719729047848091689>"
+supportB = "<@!737731464665366608>"
+pokesupport = "<@&825544367925231636>"
+wawa = "<@!813800354893791232>"
+code = 209384234235532
+client = discord.Client()
+pokeCoins = 0
+me = "<@!824425343183093801>"
+pokep token here
+charizard = '<:charmander_charmeleon_charizard:836758539522539551>'
+userList = []
+updateList = []
+bot = commands.Bot(command_prefix='^')
+
+
+
+
+@client.event
+async def on_ready():
+	global announcments
+	print("We have logged in as {0.user}".format(client))
+	if len(client.guilds) == 1:
+		await client.change_presence(activity=discord.Game(' with ' + str(len(client.guilds)) + ' server || ^help'))
+	else:
+		await client.change_presence(activity=discord.Game(' with ' + str(len(client.guilds)) + ' servers | ^help'))
+
+
+
+userList = []
+updateList = []
+bot = commands.Bot(command_prefix='^')
+
+@bot.event
+async def on_message(message):
+	if message.author == client.user:
+		return
+	msg = message.content.lower()
+	if str(message.author) not in userList:
+		userList.append(str(message.author))
+		print(userList)
+
+@bot.command()
+async def pokemonsuggest(ctx, suggestion):
+	pokemonball = ['Clefairy', 'Pikachu', 'Gligar', 'Jigglypuff', 'Incineroar','Eevee', 'Mewtwo', 'Snorlax', 'Hitmonchan', 'Gengar', 'Ditto', 'Lucario', 'Bulbasaur', 'Rhydon', 'Garchomp', 'Rayquaza', 'Arceus','Lapras', 'Lugia', 'Slowking', 'Dragonite', 'Blaziken', 'Chespin''Bulbasaur', 'Ivysaur', 'Venusaur', 'Squirtle', 'Wartortle','Blastoise', 'Charmander', 'Charmeleon', 'Charizard', 'Caterpie', 'Metapod', 'Butterfree', 'Weedle', 'Kakuna', 'Beedrill', 'Pigey','Pidgeotto', 'Pidgeot', 'Raticate', 'Rattata', 'Spearow', 'Fearow','Ekans', 'Arbok', 'Pichu', 'Greninja', 'Raichu', 'Sandshrew', 'Sandslash', 'Nidoran-:female_sign:', 'Nidorina', 'Nidoqueen','Nidoran-:male_sign:', 'Nidorino', 'Nidoking', 'Metang','Metagross', 'Mareep', 'Flaaffy', 'Ampharos','Gardevoir']
+	if suggestion.lower().capitalize() in pokemonball:
+		await ctx.send('We have already included that pokémon!')
+	else:
+		a = await client.get_user_info()
+		b = await client.get_user_info()
+		await client.send_message(a, "Hello!")
+		await client.send_message(b, "Hello!")
+
+@bot.command()
+async def help(ctx):
+	hintChance = random.randint(1, 2)
+	if hintChance == 1:
+		embed = discord.Embed(title="My Commands", description="Hey there! I'm PokéP! \nHere are the commands:\n\n**Commands:**\n^help - view commands!\n^ping ms - See your ping :D\n^credits - see the credits for our bot (It will appear in you direct message with me.)\n\n**Pokémon Commands:**\n^battle - pokemon PVP!\n^lesson - Learn something new about pokémon!\n^pokeball - Captures 1 of 64 pokémon there are! The number of pokémon will increase as time goes on!\n^story - Read an inspirational Pokémon-themed story.\n\n**Chance Commands:**\n^rate - Mareep and Pikachu rate you!\n^roll - rolls a die for you.\n^soccer - Play some soccer against a goalie of chance!\n^guess - Guess the correct pokémon!\n^best - what's the best pokemon?\n\n", color=0xffff00)
+		embed.set_footer(text='(Hint: You can ping me for the help menu.)')
+	elif hintChance == 2:
+		embed = discord.Embed(title="My Commands", description="Hey there! I'm PokéP! \nHere are the commands:\n\n**Commands:**\n^help - view commands!\n^ping ms - See your ping :D\n^credits - see the credits for our bot (It will appear in you direct message with me.)\n\n**Pokémon Commands:**\n^battle - pokemon PVP!\n^lesson - Learn something new about pokémon!\n^pokeball - Captures 1 of 64 pokémon there are! The number of pokémon will increase as time goes on!\n^story - Read an inspirational Pokémon-themed story.\n\n**Chance Commands:**\n^rate - Mareep and Pikachu rate you!\n^roll - rolls a die for you.\n^soccer - Play some soccer against a goalie of chance!\n^guess - Guess the correct pokémon!\n^best - what's the best pokemon?\n^seal - view a seal\n^slap - Slap me OH GOD", color=0xffff00)
+		embed.set_footer(text='(Hint: Do ^gameboard to view PokéP\'s games!')
+	else:
+		ctx.send('Something went wrong on our end...\nhttps://tenor.com/view/cool-dinosaur-random-game-jump-gif-11678398')
+	await ctx.send(embed=embed)
+
+@bot.command()
+async def battle(ctx):
+	winChance = random.randint (1, 5)
+	waterType = random.randint(1, 5)
+	waterList = ["Squirtle", "Gyarados", "Buizel", "Poliwag", "Seaking"]
+	if waterType == 1:
+		waterPoke = waterList[0]
+		opponent = "[SlippySquirt USA :flag_us:]"
+	if waterType == 2:
+		waterPoke = waterList[1]
+		opponent = "[SnakyGyro Greece :flag_gr:]"
+	if waterType == 3:
+		waterPoke = waterList[2]
+		opponent = "[SurfingOtter Australia :flag_au:]"
+	if waterType == 4:
+		waterPoke = waterList[3]
+		opponent = "[WackyWagger Britain :flag_gb:]"
+	if waterType == 5:
+		waterPoke = waterList[4]
+		opponent = "[KillaWail Norway :flag_no:]"
+	if winChance == 1 or winChance == 2 or winChance  == 3:
+		electricType = random.randint(0, 4)
+		electricList = ["Mareep", "Pikachu", "Electrode", "Manectric","Electivire"]
+		electricPoke = electricList[electricType]
+		await ctx.send('Finding opponent... ' + opponent)
+		await asyncio.sleep(2)
+		await ctx.send(electricPoke + ' used Thunder Shock!')
+		await asyncio.sleep(1) 
+		await ctx.send(waterPoke + ' used Water Gun!')
+		await asyncio.sleep(1)
+		await ctx.send(electricPoke + ' used Electro Ball!') 
+		await asyncio.sleep(1)
+		await ctx.send(waterPoke + ' fainted! You won!:trophy:')
+	if winChance == 4 or winChance == 5:
+		electricType = random.randint(0, 4)
+		electricList = ["Mareep", "Pikachu", "Electrode", "Manectric","Electivire"]
+		electricPoke = electricList[electricType]
+		await ctx.send('Finding opponent... ' + opponent)
+		await asyncio.sleep(2)
+		await ctx.send(electricPoke + ' used Thunder Shock!')
+		await asyncio.sleep(1) 
+		await ctx.send(waterPoke + ' used Water Gun!')
+		await asyncio.sleep(1)
+		await ctx.send(electricPoke + ' fainted! You lost!:cry: ')
+
+@bot.comand()
+async def lesson(ctx):
+	lessonChance = random.randint(1, 14)
+	if lessonChance == 1:
+		await ctx.send("Pokémon were invented by someone who had a hobby of collecting insects and loved anime!")
+	if lessonChance == 2:
+		await ctx.send("The most common type of Pokémon is actually water-type!")
+	if lessonChance == 3:
+		await ctx.send("Rhydon was the first Pokémon to ever be created. According to Pokémon legend, however, Arceus was the first Pokémon! And Bulbasaur was the first pokemon in the  Pokedex!")
+	if lessonChance == 4:
+		await ctx.send("Slowbro is the ONLY Pokémon that can devolve!")
+	if lessonChance == 5:
+		await ctx.send("The Pokémon named Zubat doesn't have any eyes! If you didn't realize, take a closer look!")
+	if lessonChance == 6:
+		await ctx.send("The gender of Pikachu can be determined by its tail!")
+	if lessonChance == 7:
+		await ctx.send("Charmander has the longest name of all the unevolved starters!")
+	if lessonChance == 8:
+		await ctx.send("Eevee has the most amount of evolutions in thePokémon world!")
+	if lessonChance == 9:
+		await ctx.send("The Pokémon named Spearow is colorblind!")
+	if lessonChance == 10:
+		await ctx.send("Pokéballs were invented because of Primeape!")
+	if lessonChance == 11:
+		await ctx.send("Bulbasaur is the first Pokémon that appears in the pokedex!")
+	if lessonChance == 12:
+		await ctx.send("Pikachu is a Japanese onomatopoeia for squeaking and shimmering.")
+	if lessonChance == 13:
+		await ctx.send("There are over 830 Pokemon species today and there are more being created!")
+	if lessonChance == 14:
+		await ctx.send("The Pokémon with the longest name is Fletchinder topping the charts with 11 letters!")
+
+@bot.command()
+async def pokeball(ctx):
+	pokeballchance = random.randint(1, 64)
+	pokemonball = ['Clefairy', 'Pikachu', 'Gligar', 'Jigglypuff', 'Incineroar','Eevee', 'Mewtwo', 'Snorlax', 'Hitmonchan', 'Gengar', 'Ditto','Lucario', 'Bulbasaur', 'Rhydon', 'Garchomp', 'Rayquaza', 'Arceus','Lapras', 'Lugia', 'Slowking', 'Dragonite', 'Blaziken', 'Chespin','Bulbasaur', 'Ivysaur', 'Venusaur', 'Squirtle', 'Wartortle','Blastoise', 'Charmander', 'Charmeleon', 'Charizard', 'Caterpie','Metapod', 'Butterfree', 'Weedle', 'Kakuna', 'Beedrill', 'Pigey','Pidgeotto', 'Pidgeot', 'Raticate', 'Rattata', 'Spearow', 'Fearow','Ekans', 'Arbok', 'Pichu', 'Greninja', 'Raichu', 'Sandshrew','Sandslash', 'Nidoran-:female_sign:', 'Nidorina', 'Nidoqueen','Nidoran-:male_sign:', 'Nidorino', 'Nidoking', 'Metang','Metagross', 'Ralts','Kirlia','Gardevoir','Gallade']
+	print('The length of the list is ' + str(len(pokemonball)))
+	if pokeballchance == 1:
+		pokemoncapture = pokemonball[0]
+		await ctx.send("You threw a pokéball and you captured a ;" + pokemoncapture + "!")
+	if pokeballchance == 2:
+		pokemoncapture = pokemonball[1]
+		await ctx.send("You threw a pokéball and you captured a " + pokemoncapture + "!")
+	if pokeballchance == 3:
+		pokemoncapture = pokemonball[2]
+		await ctx.send("You threw a pokéball and you captured a " + pokemoncapture + "!")
+	if pokeballchance == 4:
+		pokemoncapture = pokemonball[3]
+		await ctx.send("You threw a pokéball and you captured a " + pokemoncapture + "!")
+	if pokeballchance == 5:
+		pokemoncapture = pokemonball[4]
+		await ctx.send("You threw a pokéball and you captured an " + pokemoncapture + "!")
+	if pokeballchance == 6:
+		pokemoncapture = pokemonball[5]
+		await ctx.send("You threw a pokéball and you captured an " + pokemoncapture + "!")
+	if pokeballchance == 7:
+		pokemoncapture = pokemonball[6]
+		await ctx.send("You threw a pokéball and you captured a " + pokemoncapture + "!")
+	if pokeballchance == 8:
+		pokemoncapture = pokemonball[7]
+		await ctx.send("You threw a pokéball and you captured a " + pokemoncapture + "!")
+	if pokeballchance == 9:
+		pokemoncapture = pokemonball[8]
+		await ctx.send("You threw a pokéball and you captured a " + pokemoncapture + "!")
+	if pokeballchance == 10:
+		pokemoncapture = pokemonball[9]
+		await ctx.send("You threw a pokéball and you captured a " + pokemoncapture + "!")
+	if pokeballchance == 11:
+		pokemoncapture = pokemonball[10]
+		await ctx.send("You threw a pokéball and you captured a " + pokemoncapture + "!")
+	if pokeballchance == 12:
+		pokemoncapture = pokemonball[11]
+		await ctx.send("You threw a pokéball and you captured a " + pokemoncapture + "!")
+	if pokeballchance == 13:
+		pokemoncapture = pokemonball[12]
+		await ctx.send("You threw a pokéball and you captured a " + pokemoncapture + "!")
+	if pokeballchance == 14:
+		pokemoncapture = pokemonball[13]
+		await ctx.send("You threw a pokéball and you captured a " + pokemoncapture + "!")
+	if pokeballchance == 15:
+		pokemoncapture = pokemonball[14]
+		await ctx.send("You threw a pokéball and you captured a " + pokemoncapture + "!")
+	if pokeballchance == 16:
+		pokemoncapture = pokemonball[15]
+		await ctx.send("You threw a pokéball and you captured a " + pokemoncapture + "!")
+	if pokeballchance == 17:
+		pokemoncapture = pokemonball[16]
+		await ctx.send("You threw a pokéball and you captured an " + pokemoncapture + "!")
+	if pokeballchance == 18:
+		pokemoncapture = pokemonball[17]
+		await ctx.send("You threw a pokéball and you captured a " + pokemoncapture + "!")
+	if pokeballchance == 19:
+		pokemoncapture = pokemonball[18]
+		await ctx.send("You threw a pokéball and you captured a " + pokemoncapture + "!")
+	if pokeballchance == 20:
+		pokemoncapture = pokemonball[19]
+		await ctx.send("You threw a pokéball and you captured a " + pokemoncapture + "!")
+	if pokeballchance == 21:
+		pokemoncapture = pokemonball[20]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 22:
+		pokemoncapture = pokemonball[21]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 23:
+		pokemoncapture = pokemonball[22]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 24:
+		pokemoncapture = pokemonball[23]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 25:
+		pokemoncapture = pokemonball[24]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 26:
+		pokemoncapture = pokemonball[25]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 27:
+		pokemoncapture = pokemonball[26]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 28:
+		pokemoncapture = pokemonball[27]
+		await ctx.send(
+		    "You threw a pokéball and you captured an " + pokemoncapture+
+		    "!")
+	if pokeballchance == 29:
+		pokemoncapture = pokemonball[28]
+		await ctx.send(
+		    "You threw a pokéball and you captured an " + pokemoncapture+
+		    "!")
+	if pokeballchance == 30:
+		pokemoncapture = pokemonball[29]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 31:
+		pokemoncapture = pokemonball[30]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 32:
+		pokemoncapture = pokemonball[31]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 33:
+		pokemoncapture = pokemonball[32]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 34:
+		pokemoncapture = pokemonball[33]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 35:
+		pokemoncapture = pokemonball[34]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 36:
+		pokemoncapture = pokemonball[35]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 37:
+		pokemoncapture = pokemonball[36]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 38:
+		pokemoncapture = pokemonball[37]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 39:
+		pokemoncapture = pokemonball[38]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 40:
+		pokemoncapture = pokemonball[39]
+		await ctx.send(
+		    "You threw a pokéball and you captured an " + pokemoncapture+
+		    "!")
+	if pokeballchance == 41:
+		pokemoncapture = pokemonball[40]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 42:
+		pokemoncapture = pokemonball[41]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 43:
+		pokemoncapture = pokemonball[42]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 44:
+		pokemoncapture = pokemonball[43]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 45:
+		pokemoncapture = pokemonball[44]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 46:
+		pokemoncapture = pokemonball[45]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 47:
+		pokemoncapture = pokemonball[46]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 48:
+		pokemoncapture = pokemonball[47]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 49:
+		pokemoncapture = pokemonball[48]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 50:
+		pokemoncapture = pokemonball[49]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 51:
+		pokemoncapture = pokemonball[50]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 52:
+		pokemoncapture = pokemonball[51]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 53:
+		pokemoncapture = pokemonball[52]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 54:
+		pokemoncapture = pokemonball[53]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 55:
+		pokemoncapture = pokemonball[54]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 56:
+		pokemoncapture = pokemonball[55]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 57:
+		pokemoncapture = pokemonball[56]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 58:
+		pokemoncapture = pokemonball[57]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 59:
+		pokemoncapture = pokemonball[58]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 60:
+		pokemoncapture = pokemonball[59]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 61:
+		pokemoncapture = pokemonball[60]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 62:
+		pokemoncapture = pokemonball[61]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 63:
+		pokemoncapture = pokemonball[62]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+	if pokeballchance == 64:
+		pokemoncapture = pokemonball[63]
+		await ctx.send(
+		    "You threw a pokéball and you captured a " + pokemoncapture +
+		    "!")
+		
+
+	if msg == '^pokeball' or msg == '^pokéball' or msg == "^pokball" or msg == "^pokemon" or msg == "^pokeballl" or msg == '^pokeall' or msg == '^pokéall':
+		
+  if msg == '^slap':
+    await ctx.send('slapped me that hurts')
+	if 'dang' in msg or 'darn' in msg:
+		await ctx.send(
+		    'dang it, darn it, i don\'t know what to say! - PokeP')
+	if msg == '^support':
+		await ctx.send(
+		    "Support Server link: https://discord.gg/2fQCCxWSD6")
+	if msg == '^ping ms' or msg == '^pingms':
+		await ctx.send('Pong! `{0}ms`'.format(
+		    int(round(client.latency, 3) * 1000)))
+	if msg == '^servers' or msg == '^server' or msg == '^communities' or msg == '^community' or msg == '^guilds' or msg == '^guild':
+		activeservers = client.guilds
+		serverList = []
+		servers = ''
+		for sl in activeservers:
+			serverList.append(str(sl))
+		for m in serverList:
+			servers = servers + '\n' + str(m)
+		embed = discord.Embed(title='PokéP Servers!', description=servers, color=0xffff00)
+		await message.author.send(embed=embed)
+	if 'ngl' in msg:
+		await ctx.send('Hmmmm... I see. Not gonna lie either. It\'s true.')
+	if msg.startswith('r') and msg.endswith('ee'):
+		await ctx.send(msg.upper() + 'E')
+	if '^apply' in msg:
+		applyCall = message.author
+		applyChannel = client.get_channel(841710943028903956)
+		applyNotif = client.get_channel(841711262567759923)
+		await applyChannel.send(message.author.mention + ' has applied!')
+		await applyNotif.send(supportA + " " + supportB)
+		await applyNotif.send("------------------------------------------------------------------")
+		await applyNotif.send(message.author.mention + " wants to apply! Please type 'accept'!")
+		msgReply = await client.wait_for("message", check=lambda message: message.author == applyCall)
+		msgReply = msgReply.content.lower()
+		if 'accept' in msgReply:
+			await message.author.send("Hello, this is PokéP. You have been accepted to be tested to be a staff member. Please DM all members that have the " + pokesupport and Social manager + " role and contact them about your timezone.")
+			print(str(message.author) + ' wants to apply for training!')
+			await applyNotif.send("Accepted succesfully!")
+		elif 'decline' in msgReply:
+			await message.author.send("Sorry, you have been declined for either spamming this command, or you are not eligible due to having an innapropriate nickname or for other reasons.")
+			await applyNotif.send("Declined succesfully!")
+		else:
+			await message.author.send("Hmmm... something went wrong! Try typing ^apply again!")
+		print(str(message.author) + ' wants to apply for training!')
+	if msg == '^credits':
+		await ctx.send("Check your DMs! It should be there...")
+		embed = discord.Embed(title='Credits', description=str(supportA) + '\n' + str(supportB) + '\n' + str(wawa), color=0xffff00)
+		await message.author.send(embed=embed)
+	if msg == '^rate' or msg == '^raet':
+		rate = random.randint(0, 100)
+		await message.reply("The Pokémon Average Rating Department got you an average rate of " + str(rate) + "/" + "100!")	
+	if msg == '^play':
+		playCall = message.author
+		embed = discord.Embed(title='PokéP Play Services')
+		embed.add_field(name='roll :game_die:', value="Type \"roll\"!")
+		await ctx.send(embed=embed)
+		msgReply = await client.wait_for("message", check=lambda message: message.author == playCall)
+		msgReply = msgReply.content.lower()
+		roll = random.randint(1, 8)
+		if msgReply == "roll":	
+			if roll == 1 or roll == 2 or roll == 3 or roll == 4 or roll == 5 or roll 	== 6:
+				await message.reply("You rolled a die and got a " + str(roll) + "! Move " + str(roll) + " spaces.")
+			elif roll == 7:
+				await message.reply("Your die went under the couch! TOO BAD SO SAD! 0 spaces, harsh.")
+			elif roll == 8:
+				await message.reply("You rolled and got a... crazy pikachu. Move one space back.")
+		else:
+			await ctx.send("Oops! That's not a valid option. Check your spelling. Or maybe your fooling around! :wink: Type ^play again.")
+	if msg == '^update':
+		if str(message.author) in updateList:
+			await message.author.send('lol u cant do that u already redeemed!')
+			print(str(message.author) + ' tried to redeem again!')
+		else:
+			if str(message.author) == userList[0]:
+				print(str(message.author) + ' has succesfully redeemed!')
+				await message.author.send('CONGRATULATIONS! You were the first person to send a message after I was updated! You got Discord Nitro for a week!!! Amazing!')
+				updateList.append(str(message.author))
+				await asyncio.sleep(10)
+				await message.author.send('Lmao you thought XD!!!')
+			else:
+				print(str(message.author) + ' has failed to redeem!')
+				await message.author.send('OH NO u were not the first person to send a message after the update')
+	if 'let\'s go' in msg or 'lets go' in msg or 'les go' in msg or 'less go' in msg or 'lets gooooo' in msg or 'yay' in msg or 'woohoo' in msg or 'woo' in msg or 'woho' in msg or 'hah' in msg or 'yaya' in msg or 'woot' in msg or 'lol' in msg and 'woops' not in msg:
+		await ctx.send("YAY :partying_face: :tada: :confetti_ball:")
+	if msg == '^money':
+		pokeAddCoin = 0
+		await ctx.send("Please wait 5 seconds to claim your reward!")
+		for i in range(0, 10):
+			pokeAddCoin += random.randint(0, 3)
+			await asyncio.sleep(0.5)
+		await ctx.send("You created " + str(pokeAddCoin) + " PokéCoins!")
+		pokeCoins += pokeAddCoin
+		await ctx.send("There are now " + str(pokeCoins) + " PokéCoins!")
+	if '^story' in msg:
+		storyList = ["Pikachu was happily walking along when he saw Squirtle. He hid, but Squirtle saw him. Squirtle challenged poor Pikachu to a fight. Because Pikachu was electric-type and squirtle was water-type, Pikachu was effective against Squirtle. Squirtle surrendered and ran away. THE END!", "Lapras was swimming happily in her little pool. Suddenly, there was a giant splash in the water and a Gyarados came in the pool. Lapras DESPISED Gyarados. Gyarados came to challenge Lapras to a battle. Lapras reluctantly agreed and somehow defeated Gyarados. Gyarados told Lapras that it wouldn't the last time she saw him. Gyarados was wrong. Lapras never ever saw him again. THE END!", "Charmander was sitting down on the ground. Then, after sitting for nearly an hour, he got bored and decided to go for a stroll. There was a loud crash in front of him and he hid behind the closest tree. Butterfree came out when the dust cleared. \"Now where does that Charmander live?\" she asked herself. Charmander whimpered and shuddered. Butterfree spotted his tail and flew toward him. At that moment, Charmander realized that there was a small bit of reluctance in Butterfree. Then he realized why. Bug-type Pokémon are weak against fire-type! Charmander gained all the courage he could and looked Butterfree in the eye. Butterfree cowered back and flew away never to be seen again. Charmander was safe because he had shown courage in scary times.", "Vulpix was eating her berries happily on a nice little hill that she liked to call home. She lived by two trees, who stood tall no matter what happened. But that all changed when Frosmoth came along. Frosmoth was in search for a fire-type Pokémon to defeat. This would show how amazing Frosmoth was because ice is weak against fire. Defeating someone your weak against is hard. Frosmoth wanted to win a challenge. Frosmoth froze innocent bystanders and froze Vulpix's trees. Vulpix whimpered. Frosmoth heard this and was ready for battle. Vulpix, however, was not! \"At last! A fire-type pokémon to battle! Vulpix, come out, come out where ever you are!\" Frosmoth said. Finally, Vulpix showed herself! Vulpix was going to be fair, by letting Frosmoth go first. Frosmoth used Blizzard! Blizzard was weak against Vulpix, so Vulpix was didn't loose much health. Vulpix used Ember right after that and Frosmoth fainted! Vulpix went back to happily eating her berries, while Frosmoth fled, never to be seen again by Vulpix!"]
+		storyChance = random.randint(0, 3)
+		await ctx.send("Here's a story you might enjoy:")
+		await ctx.send(storyList[storyChance])
+	if msg == '^soccer':
+		soccerCall = message.author
+		goalieChance = random.randint(1, 3)
+		if goalieChance == 1:
+			right = True
+			center = False
+			left = False
+		if goalieChance == 2:
+			center = True
+			right = False
+			left = False
+		if goalieChance == 3:
+			left = True
+			center = False
+			right = False
+		await ctx.send('Soccer - Why don\'t you try hitting the ball in the goal? Type \'left\', \'middle\' or \'right\'' + str(message.author.mention) + '?\n:goal::goal::goal:\n\t ' + charizard + ' \n\n\t  :soccer:')
+		msgReply = await client.wait_for("message", check=lambda message: message.author == soccerCall)
+		msgReply = msgReply.content.lower()
+		if msgReply == "left" and left == False or msgReply == "right" and right == False or msgReply == "center" and center == False or msgReply == "middle" and center == False:
+			await message.reply("Great job! You scored!")
+		elif msgReply == "left" and left == True or msgReply == "right" and right == True or msgReply == "center" and center == True or msgReply == "middle" and center == True:
+			await message.reply("Too bad! The goalie dived for the ball and saved it!")
+		else: 
+			await message.reply('bwuh not even an option')
+
+	if msg == '^presence':
+		codeAdd = random.randint(3, 1035)
+		embed = discord.Embed(title='Presence Change Complete', description='presence change complete; code: ' + str(code) + '  2k4Abilities presenceSVR')
+		code += codeAdd
+		await ctx.send(embed=embed)
+		if len(client.guilds) == 1:
+			await client.change_presence(activity=discord.Game(' with ' + str(len(client.guilds)) + ' server || ^help'))
+		else:
+			await client.change_presence(activity=discord.Game(' with ' + str(len(client.guilds)) + ' servers || ^help'))
+	if msg == '^guess' or msg == '^gess':
+		guessCall = message.author
+		pokemonball = [
+		    'Clefairy', 'Pikachu', 'Gligar', 'Jigglypuff', 'Incineroar',
+		    'Eevee', 'Mewtwo', 'Snorlax', 'Hitmonchan', 'Gengar', 'Ditto',
+		    'Lucario', 'Bulbasaur', 'Rhydon', 'Garchomp', 'Rayquaza', 'Arceus',
+		    'Lapras', 'Lugia', 'Slowking', 'Dragonite', 'Blaziken', 'Chespin',
+		    'Bulbasaur', 'Ivysaur', 'Venusaur', 'Squirtle', 'Wartortle',
+		    'Blastoise', 'Charmander', 'Charmeleon', 'Charizard', 'Caterpie',
+		    'Metapod', 'Butterfree', 'Weedle', 'Kakuna', 'Beedrill', 'Pigey',
+		    'Pidgeotto', 'Pidgeot', 'Raticate', 'Rattata', 'Spearow', 'Fearow',
+		    'Ekans', 'Arbok', 'Pichu', 'Greninja', 'Raichu', 'Sandshrew',
+		    'Sandslash', 'Nidoran-:female_sign:', 'Nidorina', 'Nidoqueen',
+		    'Nidoran-:male_sign:', 'Nidorino', 'Nidoking', 'Metang',
+		    'Metagross', 'Ralts','Kirlia','Gardevoir','Gallade'
+		]
+		guess1 = random.randint(0, 63)
+		guess2 = random.randint(0, 63)
+		guess3 = random.randint(0, 63)
+		guess4 = random.randint(0, 63)
+		correctAnswer = random.randint(1, 4)
+		await ctx.send("Guess the pokémon! Reply with \"A\", \"B\", \"C\", or \"D\"")
+		await ctx.send("A. " + str(pokemonball[guess1]))
+		await ctx.send("B. " + str(pokemonball[guess2]))
+		await ctx.send("C. " + str(pokemonball[guess3]))
+		await ctx.send("D. " + str(pokemonball[guess4]))
+		msgReply = await client.wait_for("message", check=lambda message: message.author == guessCall)
+		msgReply = msgReply.content.lower()
+		if correctAnswer == 1:
+			A = True
+			B = False
+			C = False
+			D = False
+		elif correctAnswer == 2:
+			A = False
+			B = True
+			C = False
+			D = False
+		elif correctAnswer == 3:
+			A = False
+			B = False
+			C = True
+			D = False
+		elif correctAnswer == 4:
+			A = False
+			B = False
+			C = False
+			D = True
+		if msgReply == 'a' and A == True or msgReply == 'b' and B == True or msgReply == 'c' and C == True or msgReply == 'd' and D == True:
+			await ctx.send("WOW! Amazing job, you guessed correctly!")
+		else:
+			await ctx.send("oof, that's a wrong answer!")
+	if msg == '^shop':
+		embed = discord.Embed(title='PokéP Shop', description='Coming Soon! Check back later.', color=0xffffff)
+		embed.set_footer(text='Page 1 of 1')
+		await ctx.send(embed=embed)
+	if msg == '^trivia':
+		triviaCall = message.author
+		trivChanceQSTN = random.randint(1, 10)
+		await ctx.send("What is this pokemon?")
+		# 1 - Snorlax
+		if trivChanceQSTN == 1:
+			await ctx.send	("https://tenor.com/view/wave-snorlax-smile-hi-pokemon-gif-5417197")
+			trivReply = await client.wait_for("message", check=lambda message: 	message.author == triviaCall)
+			trivReply = trivReply.content.lower()
+			if trivReply == 'snorlax':
+				await ctx.send("WOW! Amazing job, you got it correct!")
+			else:
+				await ctx.send("oof, that's a wrong answer")
+		else:
+			await ctx.send("We sincerely apologize. This command is still in progress.")
+	if '^acc' in msg or '^account' in msg:
+		try:
+			await message.delete()
+			accountMSG = await ctx.send("Fetching account files...")
+			await asyncio.sleep(3)
+			await accountMSG.edit(content="You are " + message.author.mention + "!\nI am " + me + "!")
+		except:
+			await ctx.send("Sorry, you cannot use this command. You will need to grant me the permission \"Manage Messages\"!")
+	if '^poketypes' in msg or '^pokétypes' in msg:
+		embed = discord.Embed(title="Pokémon Types", description="Psychic\nDark\nIce\nFighting\nSteel\nFire\nWater\nGrass\nElectric\nNormal\nGhost\nGround\nRock\nPoison\nFairy\nBug\n", color=0xffff00)
+		embed.set_footer('Page 1 of 1')
+		await ctx.send(embed=embed)
+	if '^code' in msg:
+		codeCall = message.author
+		await ctx.send("What is the code?")
+		msgReply = await client.wait_for("message", check=lambda message: message.author == codeCall)
+		msgReply = msgReply.content.lower()
+		if msgReply == 'code' or msgReply == 'doubledigits' or msgReply == 'double digits':
+			await message.author.send("Good job! This command is early release, so you won\'t get anything right now.")
+		elif msgReply == 'pokép' or 'pokep':
+			await message.author.send("Good job! This command is early release, so you won\'t get anything right now.")
+		elif msgReply == 'bwuh':
+			await message.author.send("Good job! This command is early release, so you won\'t get anything right now.")
+		else:
+			await message.author.send("Nope, wrong answer!")
+	if '^gameboard' in msg or '^games' in msg:
+		gameboard = discord.Embed(title='Gameboard!')
+		print(str(gameboard) + '<-- Gameboard Method 333')
+		gameboard.add_field(name='^roll', value='Simply roll a :game_die:!', inline=True)
+		gameboard.add_field(name='^soccer', value='Just kick the :soccer: in the :goal:!', inline=True)
+		await ctx.send(embed=gameboard)
+	if msg == '^roll':
+		rollChance = random.randint(1,8)
+		if rollChance == 1 or rollChance == 2 or rollChance == 3 or rollChance == 4 or rollChance == 5 or rollChance == 6:
+			await ctx.send('You got a ' + str(rollChance) + '!')
+		elif rollChance == 7:
+			await ctx.send('You got a CRAZY PIKACHU! That\'s -1!')
+		elif rollChance == 8:
+			await ctx.send('Your die went under the couch! That\'s a zero!')
+      if msg == '^seal':
+      await ctx.send('https://media.tenor.com/videos/688aeb12355968bfe74148b2ed9cdadc/mp4' )
+
+
+
+
+keep_alive()
+bot.run('ODI0NDI1MzQzMTgzMDkzODAx.YFvL7g.kP4bV18c9FjB4oZIAcsygunBcwM')
